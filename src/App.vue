@@ -13,4 +13,8 @@ export default {
 };
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+body {
+  background-color: rgb(43, 43, 43);
+}
+</style>
