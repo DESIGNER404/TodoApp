@@ -8,6 +8,8 @@
       </button>
     </form>
     <button @click="clearList" v-bind:disabled="isDisabledTwo">Очистить</button>
+    <pre>[{{ message }}]</pre>
+    <pre></pre>
     <hr />
     <ul>
       <li v-for="(note, index) in notes" :key="note">
