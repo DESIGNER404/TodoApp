@@ -8,12 +8,11 @@
       </button>
     </form>
     <button @click="clearList" v-bind:disabled="isDisabledTwo">Очистить</button>
-    <pre>[{{ message }}]</pre>
-    <pre>[{{ message.trim() }}]</pre>
     <hr />
     <ul>
       <li v-for="(note, index) in notes" :key="note">
-        {{ note }} {{ vl }}
+        {{ note }} <button @click="priceDec">&laquo;</button> {{ price }}
+        <button @click="priceInc">&raquo;</button>
         <button
           @click="deleteElement(index)"
           style="
@@ -39,7 +38,7 @@ export default {
       title: "Список хруючева",
       message: "",
       notes: [],
-      vl: "",
+      price: 0,
     };
   },
 
@@ -75,6 +74,15 @@ export default {
     deleteElement(position) {
       this.notes.splice(position, 1);
     },
+    priceInc() {
+      this.price++;
+    },
+    priceDec() {
+      this.price--;
+      if (this.price < 0) {
+        this.price = 0;
+      }
+    },
   },
 };
 </script>
@@ -88,7 +96,7 @@ export default {
   border: 1px solid gray;
   border-radius: 10px;
   padding: 10px;
-  box-shadow: 0px 0px 10px rgba(24, 24, 24, 0.475);
+  box-shadow: 0px 0px 10px rgba(133, 30, 30, 0.475);
   & hr {
     border: 1px solid rgb(226, 166, 15);
   }
