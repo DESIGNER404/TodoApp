@@ -40,6 +40,7 @@ export default {
       title: "Список хруючева",
       message: "",
       notes: [],
+      nextTodoId: 1,
     };
   },
 
@@ -63,8 +64,9 @@ export default {
   methods: {
     hruchevo() {
       this.$refs.add_btn.style.background = "red";
-      this.notes.push({ name: this.message, count: 1 });
+      this.notes.push({ name: this.message, count: 1, id: this.nextTodoId });
       this.clear();
+      this.nextTodoId++;
     },
     clear() {
       this.message = "";
