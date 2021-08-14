@@ -1,6 +1,7 @@
 <template>
   <div class="container">
     <h1>{{ title }}</h1>
+    <pre>{{ notes }}</pre>
     <form v-on:submit.prevent="hruchevo">
       <input v-model="message" />
       <button ref="add_btn" v-bind:disabled="isDisabled">
@@ -8,13 +9,12 @@
       </button>
     </form>
     <button @click="clearList" v-bind:disabled="isDisabledTwo">Очистить</button>
-    <pre>[{{ message }}]</pre>
-    <pre></pre>
     <hr />
+    <h3 v-show="notes.length === 0">Нет айтемов</h3>
     <ul>
-      <li v-for="(note, index) in notes" :key="note">
-        {{ note }} <button @click="priceDec">&laquo;</button> {{ price }}
-        <button @click="priceInc">&raquo;</button>
+      <li v-for="note in notes" :key="note">
+        {{ note.name }} <button @click="priceDec(note)">&laquo;</button
+        >{{ note.count }} <button @click="priceInc(note)">&raquo;</button>
         <button
           @click="deleteElement(index)"
           style="
@@ -40,7 +40,6 @@ export default {
       title: "Список хруючева",
       message: "",
       notes: [],
-      price: 0,
     };
   },
 
@@ -64,7 +63,7 @@ export default {
   methods: {
     hruchevo() {
       this.$refs.add_btn.style.background = "red";
-      this.notes.push(this.message);
+      this.notes.push({ name: this.message, count: 1 });
       this.clear();
     },
     clear() {
@@ -76,14 +75,14 @@ export default {
     deleteElement(position) {
       this.notes.splice(position, 1);
     },
-    priceInc() {
-      this.price++;
-    },
-    priceDec() {
-      this.price--;
-      if (this.price < 0) {
-        this.price = 0;
+    priceDec(item) {
+      item.count--;
+      if (item.count < 1) {
+        item.count = 1;
       }
+    },
+    priceInc(item) {
+      item.count++;
     },
   },
 };
@@ -98,7 +97,7 @@ export default {
   border: 1px solid gray;
   border-radius: 10px;
   padding: 10px;
-  box-shadow: 0px 0px 10px rgba(133, 30, 30, 0.475);
+  box-shadow: 0px 0px 10px rgba(24, 24, 24, 0.475);
   & hr {
     border: 1px solid rgb(226, 166, 15);
   }
