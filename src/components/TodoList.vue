@@ -1,11 +1,11 @@
 <template>
   <div class="container">
     <h1>{{ title }}</h1>
-    <pre>{{ notes }}</pre>
+    <!-- <pre>{{ notes }}</pre> -->
     <form v-on:submit.prevent="hruchevo">
       <input v-model="message" />
       <button ref="add_btn" v-bind:disabled="isDisabled">
-        Добавить хрючево
+        Добавить элемент
       </button>
     </form>
     <button @click="clearList" v-bind:disabled="isDisabledTwo">Очистить</button>
@@ -13,8 +13,9 @@
     <h3 v-show="notes.length === 0">Нет айтемов</h3>
     <ul>
       <li v-for="note in notes" :key="note">
-        {{ note.name }} <button @click="priceDec(note)">&laquo;</button
-        >{{ note.count }} <button @click="priceInc(note)">&raquo;</button>
+        {{ note.name }} <button @click="priceDec(note)">&laquo;</button>
+        {{ note.count }} <button @click="priceInc(note)">&raquo;</button> цена:
+        {{ note.price * note.count }}
         <button
           @click="deleteElement(index)"
           style="
@@ -37,10 +38,11 @@ export default {
   name: "TodoList",
   data() {
     return {
-      title: "Список хруючева",
+      title: "Добавить элемент",
       message: "",
       notes: [],
       nextTodoId: 1,
+      price: 10,
     };
   },
 
@@ -63,8 +65,16 @@ export default {
 
   methods: {
     hruchevo() {
-      this.$refs.add_btn.style.background = "red";
-      this.notes.push({ name: this.message, count: 1, id: this.nextTodoId });
+      //let color = Math.floor(Math.random()*(999999 - 111111 + 1)) + 111111;
+      // this.$refs.add_btn.style.background = `#${color}`;
+      let hue = parseInt(Math.random() * 256);
+      this.$refs.add_btn.style.background = `hsl(${hue},70% ,30%)`;
+      this.notes.push({
+        name: this.message,
+        count: 1,
+        id: this.nextTodoId,
+        price: this.price,
+      });
       this.clear();
       this.nextTodoId++;
     },
