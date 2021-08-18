@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <h1>{{ title }}</h1>
-    <!-- <pre>{{ notes }}</pre> -->
+    <pre>{{ notes }}</pre>
     <form v-on:submit.prevent="hruchevo">
       <input v-model="message" />
       <input v-model="price" />
@@ -11,7 +11,7 @@
     </form>
     <button @click="clearList" v-bind:disabled="isDisabledTwo">Очистить</button>
     <hr />
-    <h3 v-show="notes.length === 0">Тут нихуя нет</h3>
+    <h3 v-show="notes.length === 0">Ничего нет</h3>
     <ul>
       <li v-for="note in notes" :key="note">
         {{ note.name }} <button @click="priceDec(note)">&laquo;</button>
@@ -44,7 +44,7 @@ export default {
       message: "",
       notes: [],
       nextTodoId: 1,
-      price: 10,
+      price: 0,
     };
   },
 
@@ -69,8 +69,8 @@ export default {
     hruchevo() {
       //let color = Math.floor(Math.random()*(999999 - 111111 + 1)) + 111111;
       // this.$refs.add_btn.style.background = `#${color}`;
-      let hue = parseInt(Math.random() * 256);
-      this.$refs.add_btn.style.background = `hsl(${hue},70% ,30%)`;
+      // let hue = parseInt(Math.random() * 256);
+      // this.$refs.add_btn.style.background = `hsl(${hue},70% ,30%)`;
       this.notes.push({
         name: this.message,
         count: 1,
@@ -105,14 +105,15 @@ export default {
 
 <style scoped lang="scss">
 .container {
+  color: white;
   margin-left: auto;
   margin-right: auto;
-  background-color: rgba(92, 161, 245, 0.666);
-  max-width: 450px;
-  border: 1px solid gray;
+  background-color: rgba(59, 59, 59, 0.979);
+  max-width: 600px;
+  border: 3px solid rgb(252, 172, 1);
   border-radius: 10px;
   padding: 10px;
-  box-shadow: 0px 0px 10px rgba(24, 24, 24, 0.475);
+  box-shadow: 0px 0px 20px rgba(255, 217, 1, 0.5);
   & h1 {
     color: white;
   }

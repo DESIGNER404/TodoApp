@@ -15,6 +15,6 @@ export default {
 
 <style lang="scss">
 body {
-  background-color: rgb(43, 43, 43);
+  background-color: rgb(83, 83, 83);
 }
 </style>
