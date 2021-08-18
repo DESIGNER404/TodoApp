@@ -30,6 +30,7 @@
         </button>
       </li>
     </ul>
+    {{}}
   </div>
 </template>
 
@@ -48,7 +49,7 @@ export default {
 
   computed: {
     isDisabled() {
-      if (this.message != "") {
+      if (this.message.trim() != "") {
         return false;
       } else {
         return true;
