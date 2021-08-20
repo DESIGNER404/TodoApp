@@ -3,9 +3,9 @@
     <h1>{{ title }}</h1>
     <pre>{{ notes }}</pre>
     <form v-on:submit.prevent="hruchevo">
-      <input v-model="message" />
-      <input v-model="price" />
-      <input v-model="kol" />
+      <input v-model="message" placeholder="Итем" />
+      <input v-model="price" placeholder="цена" />
+      <input v-model="kol" placeholder="Количество" />
       <button ref="add_btn" v-bind:disabled="isDisabled">
         Добавить элемент
       </button>
@@ -47,7 +47,7 @@ export default {
       notes: [],
       nextTodoId: 1,
       price: 0,
-      kol: 0,
+      kol: 1,
     };
   },
 
