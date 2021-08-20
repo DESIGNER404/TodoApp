@@ -5,6 +5,7 @@
     <form v-on:submit.prevent="hruchevo">
       <input v-model="message" />
       <input v-model="price" />
+      <input v-model="kol" />
       <button ref="add_btn" v-bind:disabled="isDisabled">
         Добавить элемент
       </button>
@@ -13,9 +14,10 @@
     <hr />
     <h3 v-show="notes.length === 0">Ничего нет</h3>
     <ul>
-      <li v-for="note in notes" :key="note">
+      <li v-for="note in notes" :key="note.id">
         {{ note.name }} <button @click="priceDec(note)">&laquo;</button>
-        {{ note.count }} <button @click="priceInc(note)">&raquo;</button> цена:
+        {{ note.count }} <button @click="priceInc(note)">&raquo;</button> за
+        единицу: <input v-model="note.price" type="" /> цена:
         {{ note.price * note.count }}
         <button
           @click="deleteElement(index)"
@@ -31,7 +33,7 @@
         </button>
       </li>
     </ul>
-    {{}}
+    {{ ArraySort }}
   </div>
 </template>
 
@@ -45,10 +47,22 @@ export default {
       notes: [],
       nextTodoId: 1,
       price: 0,
+      kol: 0,
     };
   },
 
   computed: {
+    ArraySort() {
+      let itog = 0;
+      for (let i = 0; i < this.notes.length; i++) {
+        let item = this.notes[i];
+        let sum = item.price * item.count;
+        itog = sum + itog;
+        console.log(sum);
+      }
+      return itog;
+    },
+
     isDisabled() {
       if (this.message.trim() != "") {
         return false;
@@ -73,7 +87,7 @@ export default {
       // this.$refs.add_btn.style.background = `hsl(${hue},70% ,30%)`;
       this.notes.push({
         name: this.message,
-        count: 1,
+        count: this.kol,
         id: this.nextTodoId,
         price: this.price,
       });
