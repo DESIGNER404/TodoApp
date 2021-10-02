@@ -20,7 +20,7 @@
         единицу: <input v-model="note.price" type="" /> цена:
         {{ note.price * note.count }}
         <button
-          @click="deleteElement(index)"
+          @click="deleteElement()"
           style="
             border-radius: 100%;
             padding: 0px;
@@ -58,7 +58,6 @@ export default {
         let item = this.notes[i];
         let sum = item.price * item.count;
         itog = sum + itog;
-        console.log(sum);
       }
       return itog;
     },
@@ -101,9 +100,7 @@ export default {
     clearList() {
       this.notes = [];
     },
-    deleteElement(position) {
-      this.notes.splice(position, 1);
-    },
+    deleteElement() {},
     priceDec(item) {
       item.count--;
       if (item.count < 1) {
@@ -123,7 +120,7 @@ export default {
   margin-left: auto;
   margin-right: auto;
   background-color: rgba(59, 59, 59, 0.979);
-  max-width: 600px;
+  max-width: 800px;
   border: 3px solid rgb(252, 172, 1);
   border-radius: 10px;
   padding: 10px;
