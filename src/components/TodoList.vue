@@ -100,7 +100,9 @@ export default {
     clearList() {
       this.notes = [];
     },
-    deleteElement() {},
+    deleteElement() {
+      alert("TODO");
+    },
     priceDec(item) {
       item.count--;
       if (item.count < 1) {
